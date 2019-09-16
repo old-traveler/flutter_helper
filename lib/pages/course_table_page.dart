@@ -27,7 +27,7 @@ class CourseTablePage extends StatefulWidget {
 }
 
 class _CourseTablePageState extends State<CourseTablePage> {
-  List<List<CourseData>> courseData = List();
+  List<List<CourseData>> _courseData = List();
   final String number;
 
   _CourseTablePageState(this.number);
@@ -53,7 +53,7 @@ class _CourseTablePageState extends State<CourseTablePage> {
                 }
                 return _getItemWidget(context, index - 1);
               },
-              childCount: courseData.length + 1,
+              childCount: _courseData.length + 1,
             ),
           )
         ],
@@ -72,7 +72,7 @@ class _CourseTablePageState extends State<CourseTablePage> {
     var course = CourseEntity.fromJson(json.decode(response.toString()));
     if (course.code == HttpStatus.ok) {
       setState(() {
-        courseData = CourseUtil.getCourseModel(course.data);
+        _courseData = CourseUtil.getCourseModel(course.data);
       });
     }
   }
@@ -83,7 +83,7 @@ class _CourseTablePageState extends State<CourseTablePage> {
 
   List<Widget> _getChildren(int index) {
     List<Widget> widget = List();
-    List<CourseData> course = courseData[index];
+    List<CourseData> course = _courseData[index];
     for (var value in course) {
       if (value == null) {
         widget.add(Expanded(

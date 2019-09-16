@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   _HomePageState(this.userData) {
     pages = <Widget>[
       CourseTablePage(userData.studentKH),
-      StatementPage(),
+      StatementPage(userData.studentKH),
       SecondMarketPage(),
       LostFindPage()
     ];
