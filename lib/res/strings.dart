@@ -9,5 +9,6 @@ class YStrings{
   static const String secondMarket = "市场";
   static const String lostFind = "招领";
 
+  static const List<String> weekDay = ['周一','周二','周三','周四','周五','周六','周日'];
 
 }

@@ -12,7 +12,7 @@ import 'package:flutter_helper/widget/head_portrait_widget.dart';
 class HomePage extends StatefulWidget {
   final UserData userData;
 
-  HomePage(this.userData);
+  HomePage(this.userData, {Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -21,21 +21,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  UserData userData;
+  final UserData userData;
   int _selectedIndex = 0;
   String title = YStrings.courseTable;
   var _pageController = PageController(initialPage: 0);
+  var pages;
 
-  _HomePageState(this.userData);
+  _HomePageState(this.userData) {
+    pages = <Widget>[
+      CourseTablePage(userData.studentKH),
+      StatementPage(),
+      SecondMarketPage(),
+      LostFindPage()
+    ];
+  }
 
-  var pages = <Widget>[
-    CourseTablePage(),
-    StatementPage(),
-    SecondMarketPage(),
-    LostFindPage()
-  ];
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

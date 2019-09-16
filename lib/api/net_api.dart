@@ -5,7 +5,6 @@ class NetApi{
 
   static const String LOGIN_URL = "get/loginWx/";
 
-
-
+  static const String COURSE_URL = "get/schedule/";
 
 }

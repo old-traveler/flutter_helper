@@ -38,10 +38,10 @@ class PortraitWidget extends StatelessWidget {
             })
       ],
       accountName: Text(
-        _userData.username,
+        _userData.username.isNotEmpty ? _userData.username : _userData.trueName,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
       ),
-      accountEmail: Text(_userData.bio),
+      accountEmail: Text(_userData.bio.isNotEmpty ? _userData.bio : '暂无签名'),
     );
   }
 }

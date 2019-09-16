@@ -17,13 +17,12 @@ void main() async {
   providers..provide(Provider.function((context) => theme));
 
   int themeIndex = await getTheme();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String code = await SharedPreferencesUtil.getRememberCodeApp(sharedPreferences);
+  String code = await SharedPreferencesUtil.getRememberCodeApp();
 
   bool hasLogin = code != null && code.isNotEmpty;
   UserData userData;
   if (hasLogin) {
-    userData = await SharedPreferencesUtil.getUserData(sharedPreferences);
+    userData = await SharedPreferencesUtil.getUserData();
   }
 
   runApp(ProviderNode(
