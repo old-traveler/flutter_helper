@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_helper/http/http_manager.dart';
 import 'package:flutter_helper/res/colors.dart';
 import 'package:flutter_helper/utils/course_util.dart';
 import 'package:flutter_helper/utils/shared_preferences_util.dart';
+import 'package:flutter_helper/utils/toast_util.dart';
 
 class CourseTablePage extends StatefulWidget {
   final String number;
@@ -61,8 +63,12 @@ class _CourseTablePageState extends State<CourseTablePage> {
 
   Future _onRefresh() async {
     var code = await SharedPreferencesUtil.getRememberCodeApp();
-    var response = await HttpManager.getInstance()
+    Response response = await HttpManager.getInstance()
         .get(NetApi.COURSE_URL + "$number/$code");
+    if(response == null){
+      ToastUtil.show(context: context, msg: "网络不给力");
+      return;
+    }
     var course = CourseEntity.fromJson(json.decode(response.toString()));
     if (course.code == HttpStatus.ok) {
       setState(() {
