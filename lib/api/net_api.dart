@@ -11,4 +11,6 @@ class NetApi{
 
   static const String SECOND_GOODS_URL = "trade/goods/";
 
+  static const String LOST_AND_FIND = "loses/goods/";
+
 }

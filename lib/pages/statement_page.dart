@@ -9,8 +9,8 @@ import 'package:flutter_easyrefresh/phoenix_header.dart';
 import 'package:flutter_helper/api/net_api.dart';
 import 'package:flutter_helper/entity/statement_entity.dart';
 import 'package:flutter_helper/http/http_manager.dart';
-import 'package:flutter_helper/res/strings.dart';
 import 'package:flutter_helper/utils/toast_util.dart';
+import 'package:flutter_helper/widget/list_personal_info_widget.dart';
 import 'package:flutter_helper/widget/multiple_pictures_widget.dart';
 
 class StatementPage extends StatefulWidget {
@@ -118,7 +118,12 @@ class _StatementPageState extends State<StatementPage>
 
   List<Widget> _getColumnWidget(StatemantStatemant statement) {
     List<Widget> widget = List();
-    widget.add(_getPublisherInfo(statement));
+    widget.add(ListPersonalInfoWidget(
+      headPic: statement.headPicThumb,
+      username: statement.username,
+      desc: statement.bio.isEmpty ? "暂无签名" : statement.bio,
+      time: statement.createdOn,
+    ));
     widget.add(_getStatementContent(statement.content));
     widget.add(MultiplePictureWidget(statement.pics, Size(170, 170)));
     widget.add(_getOtherInfo(statement));
@@ -126,53 +131,6 @@ class _StatementPageState extends State<StatementPage>
       widget.add(_getCommentInfo(statement.comments));
     }
     return widget;
-  }
-
-  Widget _getPublisherInfo(StatemantStatemant statement) {
-    return Stack(
-      alignment: Alignment.topLeft,
-      children: <Widget>[
-        Container(
-          height: 55,
-        ),
-        Positioned(
-          left: 10,
-          top: 10,
-          width: 45,
-          height: 45,
-          child: ClipOval(
-            child:
-                Image.network(YStrings.baseImageUrl + statement.headPicThumb),
-          ),
-        ),
-        Positioned(
-          left: 63,
-          top: 13,
-          child: Text(
-            statement.username,
-            style: TextStyle(color: Theme.of(context).primaryColor),
-            textScaleFactor: 1.1,
-          ),
-        ),
-        Positioned(
-          left: 63,
-          top: 35,
-          child: Text(
-            statement.bio != null && statement.bio.isNotEmpty
-                ? statement.bio
-                : "暂无签名",
-            style: TextStyle(color: Colors.grey),
-            textScaleFactor: 0.9,
-          ),
-        ),
-        Positioned(
-          right: 10,
-          top: 13,
-          child: Text(statement.createdOn,
-              style: TextStyle(color: Colors.grey), textScaleFactor: 0.8),
-        )
-      ],
-    );
   }
 
   Widget _getStatementContent(String content) {
@@ -227,7 +185,10 @@ class _StatementPageState extends State<StatementPage>
           alignment: Alignment.topLeft,
           child: RichText(
             textAlign: TextAlign.left,
-            text: TextSpan(text: "", children: _getCommentItemInfo(comments),style: TextStyle(height: 1.5)),
+            text: TextSpan(
+                text: "",
+                children: _getCommentItemInfo(comments),
+                style: TextStyle(height: 1.5)),
           ),
         ));
   }
@@ -244,7 +205,7 @@ class _StatementPageState extends State<StatementPage>
           recognizer: TapGestureRecognizer()..onTap = () async {}));
       textSpans.add(TextSpan(
         text: value.comment.trim() + (index < comments.length ? '\n' : ''),
-        style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.black87),
       ));
     }
     return textSpans;
