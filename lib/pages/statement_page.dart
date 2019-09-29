@@ -11,6 +11,7 @@ import 'package:flutter_helper/entity/statement_entity.dart';
 import 'package:flutter_helper/http/http_manager.dart';
 import 'package:flutter_helper/res/strings.dart';
 import 'package:flutter_helper/utils/toast_util.dart';
+import 'package:flutter_helper/widget/multiple_pictures_widget.dart';
 
 class StatementPage extends StatefulWidget {
   final String number;
@@ -23,7 +24,8 @@ class StatementPage extends StatefulWidget {
   }
 }
 
-class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveClientMixin{
+class _StatementPageState extends State<StatementPage>
+    with AutomaticKeepAliveClientMixin {
   final String number;
   EasyRefreshController _controller;
 
@@ -47,6 +49,7 @@ class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveCl
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: EasyRefresh.custom(
           controller: _controller,
@@ -107,7 +110,9 @@ class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveCl
       elevation: 5,
       margin: EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      child: Column(children: _getColumnWidget(statement)),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _getColumnWidget(statement)),
     );
   }
 
@@ -115,9 +120,7 @@ class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveCl
     List<Widget> widget = List();
     widget.add(_getPublisherInfo(statement));
     widget.add(_getStatementContent(statement.content));
-    if (statement.pics != null && statement.pics.isNotEmpty) {
-      widget.add(_getStatementImage(statement.pics));
-    }
+    widget.add(MultiplePictureWidget(statement.pics, Size(170, 170)));
     widget.add(_getOtherInfo(statement));
     if (statement.comments != null && statement.comments.isNotEmpty) {
       widget.add(_getCommentInfo(statement.comments));
@@ -175,73 +178,13 @@ class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveCl
   Widget _getStatementContent(String content) {
     return Container(
       alignment: Alignment.topLeft,
-      padding: EdgeInsets.only(left: 10, right: 10, top: 8,bottom: 5),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 5),
       child: Text(
         content.trim(),
-        style: TextStyle(letterSpacing: 1.5,fontFamily: 'mononoki'),
+        style: TextStyle(letterSpacing: 1.5, fontFamily: 'mononoki'),
         textAlign: TextAlign.left,
         textScaleFactor: 1.1,
       ),
-    );
-  }
-
-  Widget _getStatementImage(List<String> images) {
-    if (images.length == 1) {
-      return Container(
-          padding: EdgeInsets.all(10),
-          alignment: Alignment.topLeft,
-          child: Image.network(
-            YStrings.baseImageUrl + images[0],
-            alignment: Alignment.topLeft,
-          ));
-    }
-    if (images.length < 4) {
-      List<Widget> imageWidgets = new List();
-      int index = 0;
-      for (var value in images) {
-        imageWidgets.add(Padding(
-          padding: EdgeInsets.only(left: index++ == 0 ? 10 : 2),
-          child: _getStatementItemImage(value),
-        ));
-      }
-      return Row(children: imageWidgets);
-    }
-    return Stack(
-      children: <Widget>[
-        Container(
-          width: 200,
-        ),
-        Positioned(
-          left: 10,
-          top: 5,
-          child: _getStatementItemImage(images[0]),
-        ),
-        Positioned(
-          right: 10,
-          top: 5,
-          child: _getStatementItemImage(images[1]),
-        ),
-        Positioned(
-          left: 10,
-          top: 108,
-          child: _getStatementItemImage(images[2]),
-        ),
-        Positioned(
-          right: 10,
-          top: 108,
-          child: _getStatementItemImage(images[3]),
-        ),
-      ],
-    );
-  }
-
-  Widget _getStatementItemImage(String value) {
-    return Image.network(
-      YStrings.baseImageUrl + value,
-      fit: BoxFit.cover,
-      height: 150,
-      width: 150,
-      alignment: Alignment.topLeft,
     );
   }
 
@@ -284,7 +227,7 @@ class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveCl
           alignment: Alignment.topLeft,
           child: RichText(
             textAlign: TextAlign.left,
-            text: TextSpan(text: "", children: _getCommentItemInfo(comments)),
+            text: TextSpan(text: "", children: _getCommentItemInfo(comments),style: TextStyle(height: 1.5)),
           ),
         ));
   }
@@ -301,7 +244,7 @@ class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveCl
           recognizer: TapGestureRecognizer()..onTap = () async {}));
       textSpans.add(TextSpan(
         text: value.comment.trim() + (index < comments.length ? '\n' : ''),
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black54),
       ));
     }
     return textSpans;

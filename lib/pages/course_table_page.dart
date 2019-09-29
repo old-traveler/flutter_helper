@@ -40,6 +40,7 @@ class _CourseTablePageState extends State<CourseTablePage> with AutomaticKeepAli
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: EasyRefresh.custom(
         header: PhoenixHeader(),

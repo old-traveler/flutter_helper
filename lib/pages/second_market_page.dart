@@ -38,6 +38,7 @@ class _SecondMarketPageState extends State<SecondMarketPage> with AutomaticKeepA
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return EasyRefresh.custom(
       controller: _controller,
       header: PhoenixHeader(),
