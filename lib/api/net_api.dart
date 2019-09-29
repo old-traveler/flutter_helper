@@ -9,4 +9,6 @@ class NetApi{
   //获取校园说说Api
   static const String STATEMENT_URL = "statement/statement/";
 
+  static const String SECOND_GOODS_URL = "trade/goods/";
+
 }

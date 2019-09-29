@@ -26,7 +26,7 @@ class CourseTablePage extends StatefulWidget {
   }
 }
 
-class _CourseTablePageState extends State<CourseTablePage> {
+class _CourseTablePageState extends State<CourseTablePage> with AutomaticKeepAliveClientMixin{
   List<List<CourseData>> _courseData = List();
   final String number;
 
@@ -161,4 +161,7 @@ class _CourseTablePageState extends State<CourseTablePage> {
     }
     return widget;
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

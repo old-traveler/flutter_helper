@@ -23,7 +23,7 @@ class StatementPage extends StatefulWidget {
   }
 }
 
-class _StatementPageState extends State<StatementPage> {
+class _StatementPageState extends State<StatementPage> with AutomaticKeepAliveClientMixin{
   final String number;
   EasyRefreshController _controller;
 
@@ -76,6 +76,8 @@ class _StatementPageState extends State<StatementPage> {
         .get(NetApi.STATEMENT_URL + '$number/$_page');
     if (response == null) {
       ToastUtil.show(context: context, msg: "网络不给力");
+      _controller.finishRefresh(success: false);
+      _controller.finishLoad(success: false);
       return;
     }
     StatementEntity statementEntity =
@@ -304,4 +306,7 @@ class _StatementPageState extends State<StatementPage> {
     }
     return textSpans;
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
