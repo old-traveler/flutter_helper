@@ -80,4 +80,13 @@ class YColors {
       "colorPrimaryLight": Color(0xff999999),
     },
   };
+
+  static const List courseBgColor = [
+    Color(0xB38DAAE1),
+    Color(0xB375B7A0),
+    Color(0xB364C6B9),
+    Color(0xB3E38F77),
+    Color(0xB381B5CA),
+    Color(0xB3E395B4),
+  ];
 }

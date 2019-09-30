@@ -11,6 +11,7 @@ import 'package:flutter_helper/api/net_api.dart';
 import 'package:flutter_helper/entity/course_entity.dart';
 import 'package:flutter_helper/http/http_manager.dart';
 import 'package:flutter_helper/res/colors.dart';
+import 'package:flutter_helper/res/strings.dart';
 import 'package:flutter_helper/utils/course_util.dart';
 import 'package:flutter_helper/utils/shared_preferences_util.dart';
 import 'package:flutter_helper/utils/toast_util.dart';
@@ -43,24 +44,32 @@ class _CourseTablePageState extends State<CourseTablePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: EasyRefresh.custom(
-        header: PhoenixHeader(),
-        onRefresh: _onRefresh,
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                if (index == 0) {
-                  return _getBottomDateTip();
-                }
-                return _getItemWidget(context, index - 1);
-              },
-              childCount: _courseData.length + 1,
-            ),
-          )
-        ],
-      ),
-    );
+        body: Stack(
+      children: <Widget>[
+        Image.network(
+          YStrings.courseBackgroundUrl,
+          fit: BoxFit.fitWidth,
+          width: MediaQuery.of(context).size.width,
+        ),
+        EasyRefresh.custom(
+          header: PhoenixHeader(),
+          onRefresh: _onRefresh,
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  if (index == 0) {
+                    return _getBottomDateTip();
+                  }
+                  return _getItemWidget(context, index - 1);
+                },
+                childCount: _courseData.length + 1,
+              ),
+            )
+          ],
+        ),
+      ],
+    ));
   }
 
   Future _onRefresh() async {
@@ -112,8 +121,8 @@ class _CourseTablePageState extends State<CourseTablePage>
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
         color: courseItem.qsz == "1"
-            ? YColors.themeColor[Random().nextInt(6)]["colorAccent"]
-            : Colors.grey,
+            ? YColors.courseBgColor[Random().nextInt(6)]
+            : Color(0x98A9A9A9),
         child: Padding(
           padding: EdgeInsets.only(top: 4, bottom: 4, left: 2, right: 2),
           child: Text(CourseUtil.getCourseName(courseItem),
