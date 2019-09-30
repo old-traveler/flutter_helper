@@ -1,7 +1,8 @@
-# Helper
+# Helper Flutter版本
 
 
  helper是一款遵从Material Design风格设计的一款课表App
+ 此项目为Flutter版本，Android版本可移步[Helper](https://github.com/old-traveler/Helper)
  
  [![AppVeyor](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/old-traveler/flutter_helper)&nbsp;&nbsp;
  [![Packagist](https://img.shields.io/badge/Android-1.3.0-blue.svg)](https://github.com/old-traveler/Helper)&nbsp;&nbsp;
@@ -30,7 +31,8 @@
 ---
 
 <div class="half">
-    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/course.png" width = "400" height= "800"><img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/statement.png" width = "400" height= "800"  style="margin: 0px 0px 0px 50px">
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/course.png" width = "400" height= "800">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/statement.png" width = "400" height= "800">
 </div>
 
 ### 二手市场 & 失物招领
@@ -38,7 +40,8 @@
 ---
 
 <div class="half">
-    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/market.png" width = "400" height = "800"><img src = "https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/lost.png" width = "400" height = "800"  style="margin: 0px 0px 0px 50px">
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/market.png" width = "400" height = "800">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <img src = "https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/lost.png" width = "400" height = "800">
 </div>
 
 
