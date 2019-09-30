@@ -26,7 +26,8 @@ class CourseTablePage extends StatefulWidget {
   }
 }
 
-class _CourseTablePageState extends State<CourseTablePage> with AutomaticKeepAliveClientMixin{
+class _CourseTablePageState extends State<CourseTablePage>
+    with AutomaticKeepAliveClientMixin {
   List<List<CourseData>> _courseData = List();
   final String number;
 
@@ -66,7 +67,7 @@ class _CourseTablePageState extends State<CourseTablePage> with AutomaticKeepAli
     var code = await SharedPreferencesUtil.getRememberCodeApp();
     Response response = await HttpManager.getInstance()
         .get(NetApi.COURSE_URL + "$number/$code");
-    if(response == null){
+    if (response == null) {
       ToastUtil.show(context: context, msg: "网络不给力");
       return;
     }
@@ -145,18 +146,21 @@ class _CourseTablePageState extends State<CourseTablePage> with AutomaticKeepAli
       widget[i] = Expanded(
         flex: 1,
         child: Container(
+            alignment: Alignment.center,
             height: 35,
             decoration: i == curDayIndex
-                ? BoxDecoration(color: Theme.of(context).accentColor)
+                ? BoxDecoration(
+                    color: Theme.of(context).accentColor,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(1),
+                        bottomRight: Radius.circular(1)))
                 : null,
-            child: Center(
-              child: Text(
-                date[i],
-                textScaleFactor: 0.8,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: curDayIndex == i ? Colors.white : Colors.black),
-              ),
+            child: Text(
+              date[i],
+              textScaleFactor: 0.8,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: i == curDayIndex ? Colors.white : Colors.black),
             )),
       );
     }

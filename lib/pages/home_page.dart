@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_helper/entity/user_entity.dart';
+import 'package:flutter_helper/manager/dialog_manager.dart';
 import 'package:flutter_helper/pages/course_table_page.dart';
 import 'package:flutter_helper/pages/lost_find_page.dart';
 import 'package:flutter_helper/pages/second_market_page.dart';
@@ -150,6 +151,9 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.color_lens),
             title: Text("切换主题"),
             trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              DialogManager.showThemeDialog(context);
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
