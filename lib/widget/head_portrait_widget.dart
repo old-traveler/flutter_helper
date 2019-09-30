@@ -22,7 +22,7 @@ class PortraitWidget extends StatelessWidget {
           Navigator.of(context).pop();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => UserInfoPage()),
+            MaterialPageRoute(builder: (context) => UserInfoPage(userData: _userData,)),
           );
         },
       ),
