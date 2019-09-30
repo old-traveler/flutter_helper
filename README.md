@@ -30,7 +30,7 @@
 ---
 
 <div class="half">
-    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/course.png" width = "400" height= "800"><img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/statement.png" width = "400" height= "800"  style="margin: 50px 0px">
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/course.png" width = "400" height= "800"><img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/statement.png" width = "400" height= "800"  style="margin: 0px 0px 0px 50px">
 </div>
 
 ### 二手市场 & 失物招领
@@ -38,7 +38,7 @@
 ---
 
 <div class="half">
-    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/market.png" width = "400" height = "800"><img src = "https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/lost.png" width = "400" height = "800"  style="margin: 50px 0px">
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/market.png" width = "400" height = "800"><img src = "https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/lost.png" width = "400" height = "800"  style="margin: 0px 0px 0px 50px">
 </div>
 
 
