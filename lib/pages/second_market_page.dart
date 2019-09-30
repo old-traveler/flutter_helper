@@ -111,7 +111,7 @@ class _SecondMarketPageState
     SecondGoodsEntity entity = SecondGoodsEntity.fromJson(json);
     return entity == null
         ? null
-        : BasePageResult(entity.code, null, entity.goods,
-            entity.currentPage >= entity.pageination);
+        : BasePageResult(
+            entity.goods, entity.currentPage >= entity.pageination);
   }
 }

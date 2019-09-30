@@ -42,7 +42,7 @@ class _LostFindPageState extends BaseRefreshState<LostFindPage, LostFindGood> {
     LostFindEntity lostFindEntity = LostFindEntity.fromJson(json);
     return lostFindEntity == null
         ? null
-        : BasePageResult(lostFindEntity.code, null, lostFindEntity.goods,
+        : BasePageResult(lostFindEntity.goods,
             lostFindEntity.currentPage >= lostFindEntity.pageination);
   }
 

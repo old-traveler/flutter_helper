@@ -1,15 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_easyrefresh/phoenix_header.dart';
 import 'package:flutter_helper/api/net_api.dart';
+import 'package:flutter_helper/base/base_page_state.dart';
+import 'package:flutter_helper/base/base_result_model.dart';
 import 'package:flutter_helper/entity/statement_entity.dart';
 import 'package:flutter_helper/http/http_manager.dart';
-import 'package:flutter_helper/utils/toast_util.dart';
 import 'package:flutter_helper/widget/list_personal_info_widget.dart';
 import 'package:flutter_helper/widget/multiple_pictures_widget.dart';
 
@@ -24,85 +20,41 @@ class StatementPage extends StatefulWidget {
   }
 }
 
-class _StatementPageState extends State<StatementPage>
-    with AutomaticKeepAliveClientMixin {
+class _StatementPageState
+    extends BaseRefreshState<StatementPage, StatemantStatemant> {
   final String number;
-  EasyRefreshController _controller;
 
   _StatementPageState(this.number);
 
-  List<StatemantStatemant> _statements = List();
-  int _page = 1;
+  @override
+  bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = EasyRefreshController();
-    _onRefresh();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return Scaffold(
-      body: EasyRefresh.custom(
-          controller: _controller,
-          enableControlFinishLoad: true,
-          enableControlFinishRefresh: true,
-          header: PhoenixHeader(),
-          footer: ClassicalFooter(),
-          onRefresh: _onRefresh,
-          onLoad: _getStatementData,
-          slivers: <Widget>[
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return _getItemWidget(_statements[index]);
-              }, childCount: _statements.length),
-            )
-          ]),
-    );
-  }
-
-  Future _onRefresh() async {
-    _page = 1;
-    _getStatementData();
-  }
-
-  Future _getStatementData() async {
-    var response = await HttpManager.getInstance()
+  getResponse(int _page) {
+    return HttpManager.getInstance()
         .get(NetApi.STATEMENT_URL + '$number/$_page');
-    if (response == null) {
-      ToastUtil.show(context: context, msg: "网络不给力");
-      _controller.finishRefresh(success: false);
-      _controller.finishLoad(success: false);
-      return;
-    }
-    StatementEntity statementEntity =
-        StatementEntity.fromJson(json.decode(response.toString()));
-    if (statementEntity.code == HttpStatus.ok) {
-      setState(() {
-        if (_page == 1) {
-          _statements = List();
-          _controller.finishRefresh(
-              success: true,
-              noMore: int.parse(statementEntity.currentPage) >=
-                  statementEntity.pageination);
-        } else {
-          _controller.finishLoad(
-              success: true,
-              noMore: int.parse(statementEntity.currentPage) >=
-                  statementEntity.pageination);
-        }
-        _statements.addAll(statementEntity.statement);
-        _page++;
-      });
-    }
+  }
+
+  @override
+  List<Widget> getSlivers() {
+    return <Widget>[
+      SliverList(
+        delegate: SliverChildBuilderDelegate((context, index) {
+          return _getItemWidget(getItemData(index));
+        }, childCount: getItemCount()),
+      )
+    ];
+  }
+
+  @override
+  BasePageResult<StatemantStatemant> jsonToResult(json) {
+    StatementEntity statementEntity = StatementEntity.fromJson(json);
+    return statementEntity == null
+        ? null
+        : BasePageResult(
+            statementEntity.statement,
+            int.parse(statementEntity.currentPage) >=
+                statementEntity.pageination);
   }
 
   Widget _getItemWidget(StatemantStatemant statement) {
@@ -210,7 +162,4 @@ class _StatementPageState extends State<StatementPage>
     }
     return textSpans;
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

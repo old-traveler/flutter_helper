@@ -39,11 +39,14 @@ abstract class BaseRefreshState<P extends StatefulWidget, D> extends State<P>
       finishLoad(false);
       return;
     }
-    BasePageResult<D> result = jsonToResult(json.decode(response.toString()));
+    var jsonMap = json.decode(response.toString());
+    String msg = jsonMap['msg'];
+    int code = jsonMap['code'];
+    BasePageResult<D> result = jsonToResult(jsonMap);
     if (result == null) {
       ToastUtil.show(context: context, msg: "json解析失败");
       finishLoad(false);
-    } else if (result.code == HttpStatus.ok) {
+    } else if (code == HttpStatus.ok) {
       setState(() {
         finishLoad(true, noMore: result.noMore);
         if (_page == 1) {
@@ -52,11 +55,10 @@ abstract class BaseRefreshState<P extends StatefulWidget, D> extends State<P>
         _dataList.addAll(result.data);
         _page++;
       });
-    } else if (result.msg.isNotEmpty) {
-      ToastUtil.show(context: context, msg: result.msg);
+    } else if (msg.isNotEmpty) {
+      ToastUtil.show(context: context, msg: msg);
       finishLoad(false);
     } else {
-      int code = result.code;
       ToastUtil.show(context: context, msg: "服务器异常-$code");
       finishLoad(false);
     }
