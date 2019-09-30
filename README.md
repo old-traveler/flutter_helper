@@ -1,7 +1,7 @@
 # Helper Flutter版本
 
 
- helper是一款遵从Material Design风格设计的一款课表App\n
+ helper是一款遵从Material Design风格设计的一款课表App    
  此项目为Flutter版本，Android版本可移步[Helper](https://github.com/old-traveler/Helper)
  
  [![AppVeyor](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/old-traveler/flutter_helper)&nbsp;&nbsp;
