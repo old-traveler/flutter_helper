@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_helper/pages/login_page.dart';
 import 'package:flutter_helper/res/colors.dart';
+import 'package:flutter_helper/utils/shared_preferences_util.dart';
 import 'package:flutter_helper/utils/theme_provide.dart';
 import 'package:provide/provide.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,5 +77,36 @@ class DialogManager {
         Navigator.of(context).pop();
       },
     );
+  }
+
+  static void showLogoutDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text("提示"),
+            content: new Text("是否退出登录？"),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  SharedPreferencesUtil.clearUserInfo();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      (route) => route == null);
+                },
+                child: new Text("确认"),
+              ),
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: new Text("取消"),
+              ),
+            ],
+          );
+        });
   }
 }

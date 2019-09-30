@@ -33,6 +33,11 @@ class SharedPreferencesUtil{
     return UserData.fromJson(json.decode(userData));
   }
 
+  static void clearUserInfo() async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.clear();
+  }
+
 
 
 }

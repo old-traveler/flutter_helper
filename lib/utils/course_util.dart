@@ -24,7 +24,9 @@ class CourseUtil {
   }
 
   static String getCourseName(CourseData courseData) {
-    return courseData.name + "\n@" + courseData.room;
+    return courseData.name +
+        "\n@" +
+        (courseData.room.isEmpty ? "未知地点" : courseData.room);
   }
 
   static int getCurWeek() {
@@ -45,23 +47,23 @@ class CourseUtil {
       DateTime time = weekDate.add(Duration(days: i));
       int month = time.month;
       int day = time.day;
-      date[i] = YStrings.weekDay[i]+'\n$month/$day';
+      date[i] = YStrings.weekDay[i] + '\n$month/$day';
     }
     return date;
   }
 
-  static int getCurDayIndex(int week){
-    if(week != getCurWeek()){
+  static int getCurDayIndex(int week) {
+    if (week != getCurWeek()) {
       return -1;
     }
     return getCurDayInCurWeekIndex();
   }
 
-  static int getCurDayInCurWeekIndex(){
+  static int getCurDayInCurWeekIndex() {
     DateTime now = new DateTime.now();
-    int index= now.weekday - 1;
-    if(index < 0){
-      index = YStrings.weekDay.length-1;
+    int index = now.weekday - 1;
+    if (index < 0) {
+      index = YStrings.weekDay.length - 1;
     }
     return index;
   }

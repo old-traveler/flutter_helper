@@ -159,6 +159,9 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.exit_to_app),
             title: Text("退出登录"),
             trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              DialogManager.showLogoutDialog(context);
+            },
           ),
         ],
       ),
