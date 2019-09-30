@@ -13,15 +13,15 @@
 - [x] 校园说说
 - [x] 二手市场
 - [x] 失物招领
-- [] 查电费
-- [] 考试计划
-- [] 查看成绩
-- [] 图书馆
-- [] 校园日历
+- [ ] 查电费
+- [ ] 考试计划
+- [ ] 查看成绩
+- [ ] 图书馆
+- [ ] 校园日历
 - [x] 个人信息
-- [] 查找用户
-- [] 实验课表
-- [] 私信
+- [ ] 查找用户
+- [ ] 实验课表
+- [ ] 私信
 
 ## 界面展示
 
@@ -30,7 +30,7 @@
 ---
 
 <div class="half">
-    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/course.png" width = "400" height= "800"><img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/statement.png" width = "400" height= "800">
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/course.png" width = "400" height= "800"><img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/statement.png" width = "400" height= "800"  style="margin: 50px 0px">
 </div>
 
 ### 二手市场 & 失物招领
@@ -38,7 +38,7 @@
 ---
 
 <div class="half">
-    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/market.png" width = "400" height = "800"><img src = "https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/lost.png" width = "400" height = "800">
+    <img src="https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/market.png" width = "400" height = "800"><img src = "https://raw.githubusercontent.com/old-traveler/flutter_helper/master/image/lost.png" width = "400" height = "800"  style="margin: 50px 0px">
 </div>
 
 
