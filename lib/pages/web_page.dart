@@ -3,9 +3,8 @@ import 'package:flutter_helper/utils/theme_util.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:share/share.dart';
 
-// ignore: must_be_immutable
 class WebPage extends StatelessWidget {
-  String url, title;
+  final String url, title;
 
   WebPage({Key key, @required this.title, @required this.url})
       : super(key: key);

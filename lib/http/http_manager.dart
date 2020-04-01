@@ -16,8 +16,6 @@ class HttpManager {
     return instance;
   }
 
-
-
   /*
    * config it and create
    */
